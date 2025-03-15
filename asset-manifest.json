@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/legal-form-wizard/static/css/main.37b0934c.css",
+    "main.js": "/legal-form-wizard/static/js/main.7d1e936e.js",
+    "static/js/239.4e9dd770.chunk.js": "/legal-form-wizard/static/js/239.4e9dd770.chunk.js",
+    "static/js/213.77821be1.chunk.js": "/legal-form-wizard/static/js/213.77821be1.chunk.js",
+    "static/js/455.09409ea1.chunk.js": "/legal-form-wizard/static/js/455.09409ea1.chunk.js",
+    "index.html": "/legal-form-wizard/index.html",
+    "main.37b0934c.css.map": "/legal-form-wizard/static/css/main.37b0934c.css.map",
+    "main.7d1e936e.js.map": "/legal-form-wizard/static/js/main.7d1e936e.js.map",
+    "239.4e9dd770.chunk.js.map": "/legal-form-wizard/static/js/239.4e9dd770.chunk.js.map",
+    "213.77821be1.chunk.js.map": "/legal-form-wizard/static/js/213.77821be1.chunk.js.map",
+    "455.09409ea1.chunk.js.map": "/legal-form-wizard/static/js/455.09409ea1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37b0934c.css",
+    "static/js/main.7d1e936e.js"
+  ]
+}
