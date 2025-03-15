@@ -1,6 +1,6 @@
 // src/hooks/useGuestSession.js
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { UserService } from '../services/UserService';
+import  UserService  from '../services/UserService';
 
 // Constants
 const GUEST_SESSION_DURATION = 4 * 60 * 60 * 1000; // 4 hours

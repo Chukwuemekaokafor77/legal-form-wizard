@@ -7,6 +7,7 @@ import {
   AlertCircle, Check, Calendar, Home
 } from 'lucide-react';
 import { VALIDATION_RULES } from '../../data/questionSchema';
+import { validateEmail, validatePhone, validatePostalCode, validateAge } from '../../utils/validation';
 
 const FormSection = ({ title, icon: Icon, children, className = '' }) => (
   <Card className={className}>

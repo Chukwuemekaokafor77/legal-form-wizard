@@ -1,4 +1,6 @@
 // src/App.js
+import { GlobalWorkerOptions } from 'pdfjs-dist';
+GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 import React, { useState, useEffect, useCallback } from "react";
 import StepWizard from "react-step-wizard";
 import { jsPDF } from "jspdf";

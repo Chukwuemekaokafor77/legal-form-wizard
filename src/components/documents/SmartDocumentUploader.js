@@ -1,7 +1,7 @@
 // src/components/documents/SmartDocumentUploader.js
 import React, { useState, useCallback, useRef } from 'react';
 import { Upload, FileText, CheckCircle, AlertCircle, X, Loader, Sparkles } from 'lucide-react';
-import DocumentAnalysisService from '../../services/documents/DocumentAnalysisService';
+import DocumentAnalysisService from './DocumentAnalysisService';
 
 export const SmartDocumentUploader = ({
   documentType,
