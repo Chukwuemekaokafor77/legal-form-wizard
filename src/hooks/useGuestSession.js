@@ -143,15 +143,24 @@ const useGuestSession = ({
   }, [state.sessionStatus]);
 
   const handleExpiration = useCallback(() => {
-    setState(prev => ({
-      ...prev,
-      sessionStatus: 'expired',
-      guestSessionStartTime: null
-    }));
-    localStorage.removeItem(persistKey);
-    onExpire?.();
-    UserService.expireGuestSession();
-  }, [onExpire]);
+    try {
+      setState(prev => ({
+        ...prev,
+        sessionStatus: 'expired',
+        guestSessionStartTime: null
+      }));
+      localStorage.removeItem(persistKey);
+      UserService.expireGuestSession();
+
+      if (window.confirm('Your session has expired. Would you like to create an account to save your progress?')) {
+        window.location.href = '/signup?saveProgress=true';
+      } else {
+        onExpire?.();
+      }
+    } catch (err) {
+      console.error('Error handling session expiration:', err);
+    }
+  }, [onExpire, persistKey]);
 
   const startGuestSession = useCallback(async () => {
     try {

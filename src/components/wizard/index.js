@@ -5,6 +5,9 @@ import ProvinceStep from './ProvinceStep';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import Step4 from './Step4';
+import Step5 from './Step5';
+import Step6 from './Step6';
 import ReviewStep from './ReviewStep';
 import FormGenerationStep from './FormGenerationStep';
 
@@ -43,9 +46,28 @@ export const WIZARD_STEPS = {
     component: Step3,
     validation: true
   },
+  UPLOAD_DOCUMENTS: {
+    id: 'upload-documents',
+    title: 'Upload Documents',
+    description: 'Upload required documents',
+    component: Step4,
+    validation: true
+  },
+  REVIEW_INFORMATION: {
+    id: 'review-information',
+    title: 'Review Information',
+    description: 'Review your information',
+    component: Step5
+  },
+  CONFIRMATION: {
+    id: 'confirmation',
+    title: 'Confirmation',
+    description: 'Confirm and submit',
+    component: Step6
+  },
   REVIEW: {
     id: 'review',
-    title: 'Review Information',
+    title: 'Final Review',
     description: 'Review and confirm details',
     component: ReviewStep
   },
@@ -65,6 +87,9 @@ export const WIZARD_FLOW = [
   WIZARD_STEPS.LEGAL_CATEGORY,
   WIZARD_STEPS.PERSONAL_INFO,
   WIZARD_STEPS.CASE_DESCRIPTION,
+  WIZARD_STEPS.UPLOAD_DOCUMENTS,
+  WIZARD_STEPS.REVIEW_INFORMATION,
+  WIZARD_STEPS.CONFIRMATION,
   WIZARD_STEPS.REVIEW,
   WIZARD_STEPS.GENERATE_FORMS
 ];
@@ -81,7 +106,7 @@ export const getPreviousStep = (currentStepId) => {
 };
 
 export const canProceedToStep = (stepId, answers = {}, documents = []) => {
-  const step = WIZARD_STEPS[stepId];
+  const step = Object.values(WIZARD_STEPS).find(s => s.id === stepId);
   if (!step) return false;
 
   // Check if required documents are uploaded
@@ -110,6 +135,9 @@ export {
   Step1,
   Step2,
   Step3,
+  Step4,
+  Step5,
+  Step6,
   ReviewStep,
   FormGenerationStep
 };

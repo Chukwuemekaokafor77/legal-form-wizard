@@ -24,6 +24,19 @@ import {
   ChevronUp
 } from 'lucide-react';
 
+const documentRequirements = {
+  immigration: ['Passport', 'Visa Application'],
+  criminal: ['Police Report', 'Court Summons'],
+  family: ['Birth Certificate', 'Marriage License'],
+  corporate: ['Articles of Incorporation', 'Board Resolution']
+};
+
+const validateRequiredDocuments = (legalCategory, uploadedDocuments = []) => {
+  const required = documentRequirements[legalCategory] || [];
+  const uploaded = uploadedDocuments.map(doc => doc.name);
+  return required.filter(doc => !uploaded.includes(doc));
+};
+
 const InfoItem = ({ label, value, icon: Icon }) => (
   <div className="flex items-start gap-3">
     {Icon && <Icon className="w-5 h-5 text-gray-400 mt-1" />}
@@ -100,7 +113,6 @@ const ReviewStep = ({
 }) => {
   const [error, setError] = useState("");
 
-  // Validation state
   const validationStatus = useMemo(() => {
     const required = {
       personal: {
@@ -134,15 +146,24 @@ const ReviewStep = ({
   }, [answers]);
 
   const validate = () => {
-    const isValid = Object.values(validationStatus).every(status => status.isValid);
-
-    if (!isValid) {
-      const errors = Object.entries(validationStatus)
+    // Validate form fields
+    const isFieldValid = Object.values(validationStatus).every(status => status.isValid);
+    if (!isFieldValid) {
+      const fieldErrors = Object.entries(validationStatus)
         .filter(([_, status]) => !status.isValid)
         .map(([_, status]) => `${status.label} is incomplete`);
+      
+      setError(fieldErrors.join(', '));
+      onValidationError?.(fieldErrors);
+      return false;
+    }
 
-      setError(errors.join(', '));
-      onValidationError?.(errors);
+    // Validate documents
+    const missingDocs = validateRequiredDocuments(answers.legalCategory, answers.uploadedDocuments);
+    if (missingDocs.length > 0) {
+      const docError = `Missing required documents: ${missingDocs.join(', ')}`;
+      setError(docError);
+      onValidationError?.([docError]);
       return false;
     }
 
