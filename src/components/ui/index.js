@@ -18,3 +18,4 @@ export * from './CustomNavigation';
 export * from './card';
 export { LegalText } from './LegalText';
 export * from './GuestUserBanner';
+export { default as ProgressTracker } from './ProgressTracker';

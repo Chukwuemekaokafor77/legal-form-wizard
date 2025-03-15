@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 import {
   LegalDisclaimer,
   SaveProgressButton,
-  ErrorMessage,
-  ProgressBar,
-  AutoSaveIndicator
+  AutoSaveIndicator,
+  ProgressTracker
 } from '../ui';
 import { AlertCircle, Info } from 'lucide-react';
 
@@ -13,39 +12,43 @@ export const StepWrapper = ({
   children,
   step,
   totalSteps,
+  steps,
+  completedSteps,
   isLoading,
   error,
   onSave,
   isSaving,
   lastSaved,
   showProgress = true,
-  className = ''
+  className = '',
+  estimatedTimes,
+  onStepClick
 }) => {
   const [showHelp, setShowHelp] = useState(false);
   const [autoSaveStatus, setAutoSaveStatus] = useState('saved');
 
-  // Handle auto-save indicator
   useEffect(() => {
-    if (isSaving) {
-      setAutoSaveStatus('saving');
-    } else if (error) {
-      setAutoSaveStatus('error');
-    } else {
-      setAutoSaveStatus('saved');
-    }
+    setAutoSaveStatus(isSaving ? 'saving' : error ? 'error' : 'saved');
   }, [isSaving, error]);
 
   return (
     <div className={`flex flex-col min-h-full ${className}`}>
-      {/* Progress and Save Status */}
-      <div className="mb-6 space-y-2">
-        {showProgress && (
-          <ProgressBar
+      {/* Progress Tracking */}
+      {showProgress && (
+        <div className="mb-6">
+          <ProgressTracker
             currentStep={step}
             totalSteps={totalSteps}
+            steps={steps}
+            completedSteps={completedSteps}
+            estimatedTimes={estimatedTimes}
+            onStepClick={onStepClick}
           />
-        )}
+        </div>
+      )}
 
+      {/* Save Status and Controls */}
+      <div className="mb-6 space-y-2">
         <div className="flex items-center justify-between">
           <AutoSaveIndicator status={autoSaveStatus} />
           <div className="flex items-center gap-2">
@@ -113,7 +116,7 @@ export const StepWrapper = ({
   );
 };
 
-// Helper component for consistent section styling
+// StepSection component remains unchanged
 export const StepSection = ({
   title,
   subtitle,
@@ -123,14 +126,8 @@ export const StepSection = ({
   <div className={`mb-8 ${className}`}>
     {title && (
       <div className="mb-4">
-        <h3 className="text-lg font-medium text-gray-900">
-          {title}
-        </h3>
-        {subtitle && (
-          <p className="mt-1 text-sm text-gray-500">
-            {subtitle}
-          </p>
-        )}
+        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+        {subtitle && <p className="mt-1 text-sm text-gray-500">{subtitle}</p>}
       </div>
     )}
     {children}

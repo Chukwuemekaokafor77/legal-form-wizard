@@ -4,6 +4,8 @@ GlobalWorkerOptions.workerSrc = '//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120
 import React, { useState, useEffect, useCallback } from "react";
 import StepWizard from "react-step-wizard";
 import { jsPDF } from "jspdf";
+import EnhancedFormWizard from './components/wizard/EnhancedFormWizard';
+
 import {
   ChecklistStep,
   ProvinceStep,
@@ -46,6 +48,7 @@ import useGuestSession from './hooks/useGuestSession';
 import { legalTermsGlossary } from './data/legalTermsGlossary';
 import { pathwayRequirements } from './data/pathwayRequirements';
 import "./App.css";
+
 
 const GUEST_SESSION_TIMEOUT = 14400; // 4 hours in seconds
 
@@ -181,7 +184,7 @@ const App = () => {
   }
 
   return (
-    <div className="wizard-container">
+    <div className="App">
       <h1>Legal Form Wizard</h1>
       
       {isGuest && (

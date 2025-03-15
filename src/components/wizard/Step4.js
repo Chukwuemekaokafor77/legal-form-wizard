@@ -6,6 +6,7 @@ import { Alert, AlertDescription } from '../ui/Alert';
 import { pathwayRequirements } from '../../data/pathwayRequirements';
 import SmartDocumentUploader from '../documents/SmartDocumentUploader';
 
+
 const Step4 = ({ 
   onChange, 
   answers = {},
