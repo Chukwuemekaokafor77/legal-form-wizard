@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { FileText, Upload, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import { Alert, AlertDescription } from '../ui/Alert';
 import { pathwayRequirements } from '../../data/pathwayRequirements';
-import SmartDocumentUploader from '../documents/SmartDocumentUploader';
+import EnhancedDocumentUploader from '../documents/EnhancedDocumentUploader';
 
 
 const Step4 = ({ 
